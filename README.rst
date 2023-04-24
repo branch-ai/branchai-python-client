@@ -15,6 +15,5 @@ How to use
 
   import branchai
   client = branchai.client("server_url")
-  destination = client.with_pipeline(pipeline_id)
-  results = destination.search("what ....")
+  results = client.with_pipeline(pipeline_id).search("what ....")
 
