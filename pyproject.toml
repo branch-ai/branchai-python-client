@@ -1,0 +1,16 @@
+[project]
+name = "branchai"
+version = "0.0.1"
+description = "Python client for BranchAI"
+readme = "README.rst"
+requires-python = ">=3.8"
+license = {file = "LICENSE.txt"}
+dependencies = [
+    "requests>2.0.0"
+]
+
+[project.urls]
+homepage = "https://branch-ai.com"
+documentation = "https://readthedocs.org"
+repository = "https://github.com/"
+changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
