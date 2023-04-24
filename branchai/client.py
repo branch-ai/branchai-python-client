@@ -28,6 +28,8 @@ class Client:
         return response
 
     def generate(self, query: str, top_k: int = 1):
+        if not self.pipeline_id and not self.destination_id:
+            raise TypeError("Missing pipeline or destination, try with_pipeline or with_destination")
         payload = {
             "query": query,
             "top_k": top_k,
@@ -38,9 +40,3 @@ class Client:
         return response
 
 
-"""
-import branchai
-client = branchai.client("server_url")
-destination = client.with_pipeline(pipeline_id) || client.with_destination(destination_id)
-results = destination.search("what ....")
-"""
