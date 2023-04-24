@@ -29,5 +29,5 @@ Generate answer from matching documents using chatGPT
 
   import branchai
   client = branchai.Client("server_url")
-  results = client.with_pipeline(pipeline_id).generate("what ....")
+  answer = client.with_pipeline(pipeline_id).generate("what ....")
 
