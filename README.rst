@@ -14,6 +14,6 @@ How to use
 .. code-block:: python
 
   import branchai
-  client = branchai.client("server_url")
+  client = branchai.Client("server_url")
   results = client.with_pipeline(pipeline_id).search("what ....")
 
