@@ -18,7 +18,7 @@ Get matching documents for query from the vector DB
 
   import branchai
   client = branchai.Client("server_url")
-  results = client.with_pipeline(pipeline_id).search("what ....")
+  results = client.with_adapter(pipeline_id).search("what ....")
 
 
 Generate
@@ -29,5 +29,5 @@ Generate answer from matching documents using chatGPT
 
   import branchai
   client = branchai.Client("server_url")
-  answer = client.with_pipeline(pipeline_id).generate("what ....")
+  answer = client.with_adapter(pipeline_id).generate("what ....")
 
