@@ -10,10 +10,24 @@ Visit the official `BranchAI <https://www.branch-ai.com>`_ website for more info
 
 How to use
 ---------------------
+Search
+*********************
+Get matching documents for query from the vector DB 
 
 .. code-block:: python
 
   import branchai
-  client = branchai.client("server_url")
+  client = branchai.Client("server_url")
   results = client.with_pipeline(pipeline_id).search("what ....")
+
+
+Generate
+*********************
+Generate answer from matching documents using chatGPT
+
+.. code-block:: python
+
+  import branchai
+  client = branchai.Client("server_url")
+  answer = client.with_pipeline(pipeline_id).generate("what ....")
 
