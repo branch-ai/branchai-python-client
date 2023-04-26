@@ -1,8 +1,9 @@
 import requests
 
+
 class Adapter:
-    def __init__(self, url, pipeline_id=None, destination_id=None):
-        self.url = url
+    def __init__(self, server_url, pipeline_id=None, destination_id=None):
+        self.server_url = server_url
         self.pipeline_id = pipeline_id
         self.destination_id = destination_id
 
@@ -15,7 +16,7 @@ class Adapter:
             "pipeline_id": self.pipeline_id,
             "destination_id": self.destination_id
         }
-        response = requests.post(f"{self.url}/search", json=payload)
+        response = requests.post(f"{self.server_url}/search", json=payload)
         return response
 
     def generate(self, query: str, top_k: int = 1):
@@ -27,5 +28,5 @@ class Adapter:
             "pipeline_id": self.pipeline_id,
             "destination_id": self.destination_id
         }
-        response = requests.post(f"{self.url}/generate", json=payload)
+        response = requests.post(f"{self.server_url}/generate", json=payload)
         return response

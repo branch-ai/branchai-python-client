@@ -1,32 +1,26 @@
 import requests
 
+from branchai.pipeline import Pipeline
+
 
 class Recipe:
-    endpoint = ""
+    server_url = ""
     payload = {}
 
-    @classmethod
-    def create(cls, url, template: str, payload: dict):
+    def __init__(self, server_url, template: str):
+        self.server_url = server_url
+        if template == "webpage":
+            self.url = f"{self.server_url}/recipes/webpage"
+        else:
+            raise TypeError(f"Recipe ({template}) not supported")
+
+    def create_pipeline(self, payload: dict) -> Pipeline:
         if 'source' not in payload:
             raise TypeError("source parameter missing")
         if 'destination' not in payload:
             raise TypeError("destination parameter missing")
-        if template == "webpage":
-            return WebpageRecipe(url, payload)
-
-    @classmethod
-    def create_pipeline(cls, recipe: "Recipe") -> dict:
-        response = requests.post(f"{recipe.url}/{recipe.endpoint}", json=recipe.payload)
+        response = requests.post(self.url, json=payload)
         if response.status_code == 200:
-            return response.json()
+            return Pipeline(self.server_url, response.json())
         else:
             raise TypeError("Unable to create pipeline")
-
-
-class WebpageRecipe(Recipe):
-    endpoint = "recipes/webpage"
-
-    def __init__(self, url, payload):
-        self.payload = payload
-        self.url = f"{url}/{self.endpoint}"
-        # ToDo: Additional validation for source
