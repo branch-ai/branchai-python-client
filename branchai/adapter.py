@@ -7,12 +7,13 @@ class Adapter:
         self.pipeline_id = pipeline_id
         self.destination_id = destination_id
 
-    def search(self, query: str, top_k: int = 1):
+    def search(self, query: str, top_k: int = 1, certainty: float=0.5):
         if not self.pipeline_id and not self.destination_id:
             raise TypeError("Missing pipeline or destination, try with_pipeline or with_destination")
         payload = {
             "query": query,
             "top_k": top_k,
+            "certainty": certainty,
             "pipeline_id": self.pipeline_id,
             "destination_id": self.destination_id
         }
