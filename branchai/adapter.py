@@ -29,7 +29,7 @@ class Adapter:
             "temperature": temperature,
             "pipeline_id": self.pipeline_id,
             "destination_id": self.destination_id,
-            "session_id": self.session_id
+            "session_id": session_id
         }
         response = requests.post(f"{self.server_url}/generate", json=payload)
         return response
