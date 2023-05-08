@@ -34,3 +34,16 @@ class Adapter:
         }
         response = requests.post(f"{self.server_url}/generate", json=payload)
         return response
+
+    def reason(self, query: str, temperature: float = 0, session_id: str = None):
+        if not self.pipeline_id and not self.destination_id:
+            raise TypeError("Missing pipeline or destination, try with_pipeline or with_destination")
+        payload = {
+            "query": query,
+            "temperature": temperature,
+            "pipeline_id": self.pipeline_id,
+            "destination_id": self.destination_id,
+            "session_id": session_id
+        }
+        response = requests.post(f"{self.server_url}/reason", json=payload)
+        return response
