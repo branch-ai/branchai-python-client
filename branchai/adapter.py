@@ -7,10 +7,11 @@ class Adapter:
         self.pipeline_id = pipeline_id
         self.destination_id = destination_id
 
-    def search(self, query: str, top_k: int = 1, certainty: float=0.5):
+    def search(self, query: str, top_k: int = 1, certainty: float = 0.5, user_id: str = ""):
         if not self.pipeline_id and not self.destination_id:
             raise TypeError("Missing pipeline or destination, try with_pipeline or with_destination")
         payload = {
+            "user_id": user_id,
             "query": query,
             "top_k": top_k,
             "certainty": certainty,
@@ -20,10 +21,12 @@ class Adapter:
         response = requests.post(f"{self.server_url}/search", json=payload)
         return response
 
-    def generate(self, query: str, top_k: int = 1, system_prompt: str = None, temperature: float = 0, session_id: str = None):
+    def generate(self, query: str, top_k: int = 1, system_prompt: str = None, temperature: float = 0,
+                 session_id: str = None, user_id: str = ""):
         if not self.pipeline_id and not self.destination_id:
             raise TypeError("Missing pipeline or destination, try with_pipeline or with_destination")
         payload = {
+            "user_id": user_id,
             "query": query,
             "system_prompt": system_prompt,
             "top_k": top_k,
@@ -35,10 +38,11 @@ class Adapter:
         response = requests.post(f"{self.server_url}/generate", json=payload)
         return response
 
-    def reason(self, query: str, temperature: float = 0, session_id: str = None):
+    def reason(self, query: str, temperature: float = 0, session_id: str = None, user_id: str = ""):
         if not self.pipeline_id and not self.destination_id:
             raise TypeError("Missing pipeline or destination, try with_pipeline or with_destination")
         payload = {
+            "user_id": user_id,
             "query": query,
             "temperature": temperature,
             "pipeline_id": self.pipeline_id,
