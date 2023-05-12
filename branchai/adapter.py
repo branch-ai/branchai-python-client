@@ -1,3 +1,5 @@
+from typing import Optional
+
 import requests
 
 
@@ -22,12 +24,13 @@ class Adapter:
         return response
 
     def generate(self, query: str, top_k: int = 1, system_prompt: str = None, temperature: float = 0,
-                 session_id: str = None, user_id: str = ""):
+                 session_id: str = None, user_id: str = "", query_id: Optional[str] = None):
         if not self.pipeline_id and not self.destination_id:
             raise TypeError("Missing pipeline or destination, try with_pipeline or with_destination")
         payload = {
             "user_id": user_id,
             "query": query,
+            "query_id": query_id,
             "system_prompt": system_prompt,
             "top_k": top_k,
             "temperature": temperature,
